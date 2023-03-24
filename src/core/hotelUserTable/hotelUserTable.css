@@ -1,0 +1,173 @@
+.HotelUserTable {}
+
+
+.datatable-cab-crud-demo{
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    margin: 20px;
+  
+   /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+}
+
+.datatable-cab-crud-demo .table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   
+    
+}
+@media screen and (max-width: 960px) {
+    .datatable-cab-crud-demo .table-header {
+        align-items: flex-start;
+    }
+}
+.datatable-cab-crud-demo .product-image {
+    width: 100px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.datatable-cab-crud-demo .p-dialog .product-image {
+    width: 150px;
+    margin: 0 auto 2rem auto;
+    display: block;
+}
+.datatable-cab-crud-demo .confirmation-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media screen and (max-width: 960px) {
+    .datatable-cab-crud-demo .p-toolbar {
+        flex-wrap: wrap;
+    }
+    .datatable-crud-demo .p-toolbar .p-button {
+        margin-bottom: 0.25rem;
+    }
+    .datatable-cab-crud-demo .table-header {
+        flex-direction: column;
+    }
+    .datatable-cab-crud-demo .table-header .p-input-icon-left, .datatable-crud-demo .table-header input {
+        width: 100%;
+    }
+}
+
+.status-Active{
+    background-color: rgb(144, 216, 144);
+    color: rgb(14, 83, 14);
+    font-size: 18px;
+    padding: 10px;
+    font-weight: 500;
+}
+
+.status-InActive{
+    background-color: rgb(223, 156, 156);
+    color:rgb(145, 12, 12);
+    font-size: 18px;
+    padding: 10px;
+    font-weight: 500;
+}
+
+.toast-container{
+    z-index: 2 !important;
+}
+
+.cards{
+   width: 96vw;
+}
+
+/* .dark-bg{
+    /* background-color: black
+    background-color: black !important;
+    color: #ffffff !important;
+} */
+
+
+.sidebar-table{
+    width: 80vw;
+}
+
+
+
+
+.Cabs {
+    min-height: 100vh;
+    display: flex;
+    font-family: "Nunito", sans-serif;
+}
+
+.header-body-cabs-container{
+    min-width: 100vw;
+    margin-top: 65px;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6f9ff;
+    padding-left: 20px;
+    }
+
+.table-cabs-user{
+    background-color: #ffffff;
+    width: 98vw;
+    height: fit-content;
+    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+
+@media screen and (max-width:768px) {
+    .table-cabs-user{
+        width: 100%;
+    }
+    
+}
+
+@media screen and (max-width:768px) {
+    .sidebar-cabs-user{
+        width: 100vw;
+    }
+    
+}
+
+.sidebar-cabs-user{
+    width: 82vw;
+}
+
+
+
+.header-cabs-container{
+    z-index: 1;
+}
+
+@media screen and (min-width:768px){
+    .navbar-cabs-user{
+        padding-left: 320px;
+    } 
+}
+
+@media screen and (max-width:768px) {
+
+    .navbar-cabs-user{
+        padding-left: 0px;
+    }
+    
+}
+
+
+
+
+.menu-btn{
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    border-radius: 100%;
+    width: 50px;
+}
+
+.user-heading{
+    text-align: left;
+    color: #012970;
+    margin-top: 10px;
+    margin-top: 10px;
+}
