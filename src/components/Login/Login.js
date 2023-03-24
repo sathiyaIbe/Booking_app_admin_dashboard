@@ -90,43 +90,42 @@ const checkToken=token===null
 
 
   return (
-    <div className='main-login-container' data-testid="Login" >
-    <MDBContainer   >
-      <ToastContainer />
-<div className='login-container'>
-      <MDBCard className='logins' >
-        <MDBRow className='g-0'>
 
-          <MDBCol md='6'>
-            <MDBCardImage src='https://img.freepik.com/free-vector/access-control-system-abstract-concept_335657-12.jpg' alt="login form" className='rounded-start w-100'/>
-          </MDBCol>
-
-          <MDBCol md='6'>
-            <MDBCardBody className='d-flex flex-column '>
-
-            
-              <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Login into admin account</h5>
-
-              { emailCheck&& <p style={{color:'red', textAlign:'left', margin:'0px'}}>*Required </p> }
-
-                <MDBInput wrapperClass='mb-4' placeholder='Email address' id='usernam' type='email' size="lg" onBlur={blurHandlerEmail} value={email} onChange={(e)=>(setEmail(e.target.value))}/>
-                { passwordCheck&& <p style={{color:'red', textAlign:'left', margin:'0px'}}>*Required </p> }
-                { passwordError&& <p style={{color:'red', textAlign:'left', margin:'0px'}}>*password must be seven characters </p> }
-                <MDBInput wrapperClass='mb-4' placeholder='Password' id='password' type='password' size="lg" style={{marginBottom:'0px'}} onBlur={blurHandlerPassword} value={password}  onChange={(e)=>(setPassword(e.target.value))}/>
-               
-
-              <MDBBtn className="mb-3 px-5" style={{height: '50px'}} color='dark' size='lg' onClick={onSubmit}>Login</MDBBtn>
-
-             
-
-            </MDBCardBody>
-          </MDBCol>
-
-        </MDBRow>
-      </MDBCard>
-      </div>
-    </MDBContainer>
+<div className= 'main-login-container'  data-testid="Login">
+        <div className='cons'>
+        <div className="card-containers ">
+         
+          <div className="img-containers">
+      <img src="https://img.freepik.com/free-vector/access-control-system-abstract-concept_335657-12.jpg" className="img-fluid rounded-start" alt="img"/>
     </div>
+    <div className='body-containers text-start  '>
+   
+              <div className="mb-3">
+                <label className="form-label">Email</label>
+                <div className="input-group">
+              
+                  <input type="email" className="form-control" id="email" name='email' value={email} onChange={(event) => setEmail(event.target.value)} />
+                </div>
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Password</label>
+                <div className="input-group">
+                
+                  <input type="password" className="form-control" id="password" name='password' value={password} onChange={(event) => setPassword(event.target.value)} />
+                </div>
+              </div>
+              <div>
+                <button className='btn w-100 btn-primary' onClick={onSubmit} type='submit'>Login</button>
+              </div>
+             
+           
+            
+          
+           
+          </div>
+        </div>
+        </div>
+        </div>
   );
 }
 

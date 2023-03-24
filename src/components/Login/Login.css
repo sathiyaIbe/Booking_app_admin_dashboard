@@ -31,3 +31,43 @@
     border-radius: 10px !important;
     width: 800px!important;
   }
+
+  .cons{
+    min-height: 100vh;
+    display: flex !important;
+    justify-content: center;
+    align-items: center !important;
+  }
+
+  .img-containers{
+    width: 300px;
+  }
+
+  .card-containers{
+    background-color: #fff;
+    padding: 40px;
+    width: fit-content;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    display: flex;
+  }
+
+  .body-containers{
+    margin-top: 40px;
+  }
+
+  @media screen and (max-width:768px) {
+   
+    .card-containers{
+      display: flex !important;
+      flex-direction: column;
+      
+    }
+    .card-containers{
+      padding: 25px;
+    }
+
+    .img-containers{
+      width: 200px;
+    }
+
+  }
