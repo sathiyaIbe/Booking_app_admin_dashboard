@@ -27,7 +27,7 @@ export const DeleteMultipleUserApi=async (data)=>{
 
 export const UpdateUserApi=async(data)=>{
 
-  return await axios.put('http://localhost:8080/user/api/userRegister', data)
+  return await axios.put('http://localhost:8080/authentication/api/updateuser', data)
 }
 
 export const CountUserApi=async()=>{
@@ -49,6 +49,19 @@ export const importUser=async(data)=>{
 
 export const GetUser=async()=>{
   return await axios.get('http://localhost:8080/authentication/api/getuser')
+}
+export const UpdateUser=async(data)=>{
+  return await axios.put('http://localhost:8080/authentication/api/updateuser',data)
+}
+export const RegisterUser=async(data)=>{
+  return await axios.post('http://localhost:8080/authentication/api/registeruser', data)
+}
+export const DeleteUser=async(data)=>{
+  console.log(data)
+  return await axios.delete(`http://localhost:8080/authentication/api/deleteuser${data}`)
+}
+export const ImportUser=async(data)=>{
+  return await axios.post('http://localhost:8080/authentication/api/importuser', data)
 }
 
 

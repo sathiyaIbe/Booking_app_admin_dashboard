@@ -23,7 +23,6 @@ import { UpdateCabUserApi } from '../../services/apiCapRegister/apiCapRegister';
 import { DeleteMultipleCabUserApi } from '../../services/apiCapRegister/apiCapRegister';
 import { CabService } from '../../services/apiCapRegister/apiCapRegister';
 import 'primeicons/primeicons.css';
-import { DeleteMultipleUserApi } from '../../services/UserService/UserService';
 import { UpdateUserApi } from '../../services/UserService/UserService';
 import { elementAcceptingRef } from '@mui/utils';
 import Context from '../../services/Context/Context';
@@ -326,9 +325,7 @@ const CabUserTable = (props) => {
             var data = { "_id": each._id }
             return data
         })
-        DeleteMultipleUserApi(ids).then(res => {
-           
-        })
+
         let _products = products.filter(val => !selectedProducts.includes(val));
         setProducts(_products);
         setDeleteProductsDialog(false);

@@ -1,27 +1,11 @@
 import React, {  useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './Login.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import {Navigate, useNavigate} from 'react-router-dom'
 import  {Apilogin}  from '../../services/apilogin/apilogin'
-
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-
-
-
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
-  MDBInput
-}
-from 'mdb-react-ui-kit';
 import { render } from '@testing-library/react';
 
 
@@ -92,8 +76,11 @@ const checkToken=token===null
   return (
 
 <div className= 'main-login-container'  data-testid="Login">
+  <ToastContainer />
         <div className='cons'>
+
         <div className="card-containers ">
+
          
           <div className="img-containers">
       <img src="https://img.freepik.com/free-vector/access-control-system-abstract-concept_335657-12.jpg" className="img-fluid rounded-start" alt="img"/>
