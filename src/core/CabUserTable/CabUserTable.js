@@ -6,29 +6,19 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-import { FileUpload } from 'primereact/fileupload';
-import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
-import { InputTextarea } from 'primereact/inputtextarea';
 import { RadioButton } from 'primereact/radiobutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { ApiCapUser } from '../../services/apiCapRegister/apiCapRegister';
-import { GetUserDetailsApi } from '../../services/UserService/UserService';
-import { DeleteUserApi } from '../../services/UserService/UserService';
-import { UserService } from '../../services/UserService/UserService';
 import { DeleteCabUserApi } from '../../services/apiCapRegister/apiCapRegister';
 import { UpdateCabUserApi } from '../../services/apiCapRegister/apiCapRegister';
-import { DeleteMultipleCabUserApi } from '../../services/apiCapRegister/apiCapRegister';
 import { CabService } from '../../services/apiCapRegister/apiCapRegister';
 import 'primeicons/primeicons.css';
-import { UpdateUserApi } from '../../services/UserService/UserService';
-import { elementAcceptingRef } from '@mui/utils';
 import Context from '../../services/Context/Context';
 import axios from 'axios';
 import { parse } from 'papaparse';
-import { ImportCabUser } from '../../services/apiCapRegister/apiCapRegister';
 import { ImportCabDetail } from '../../services/apiCapRegister/apiCapRegister';
 const CabUserTable = (props) => {
     let emptyProduct = {
@@ -73,13 +63,13 @@ const CabUserTable = (props) => {
     const [ACfromlocation, setACfromlocation] = useState([]);
     const [ACtolocation, setACtolocation] = useState([]);
     const [showAcCharges, setShowAcCharges] = useState(false)
-    const [cabUserFile, setCabUserFile]=useState()
     const [cabDetailsFile, setCabDetailsFile]=useState()
     useEffect(() => {
         ApiCapUser().then(res => {
             const data = res.data.cabUserData
             const cabData=res.data.cabData
             const userData=data.reverse()
+            console.log(cabData)
              setProducts(userData)
              setcabDatas(cabData)
         })
@@ -98,9 +88,6 @@ const CabUserTable = (props) => {
         setshow_from_address(false);
         setFromlocation('')
       }
-    const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    }
     const openNew = () => {
         setProduct(emptyProduct);
         setEachCabDetail(emptyData)
@@ -152,13 +139,11 @@ const CabUserTable = (props) => {
                 pricePerKm:eachCabDetail.pricePerKm,
                 acPrice:eachCabDetail.acPrice,
                 extraKmCharges:eachCabDetail.extraKmCharges,
-                availableStatus:product.availableStatus
             }
             const data = {
                 personalDetails: personalDetails,
                 cabDetails: cabDetails
             }
-         
             CabService(data).then(res => {
                 const data1 = res.data.userDataStore
                 const data2=res.data.cabDataStore
@@ -201,13 +186,11 @@ const CabUserTable = (props) => {
             UpdateCabUserApi(data).then(res => {
                  const index=  findIndexByIdCab(eachCabDetail.driverId)
                  _cabDatas[index]=eachCabDetail
-                 
                 setcabDatas(_cabDatas)
                 setProducts(_products)
                 setEachCabDetail(emptyData)
                 setProduct(emptyProduct);
             }).catch(err => {
-               
             })
             toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
         }
@@ -215,7 +198,6 @@ const CabUserTable = (props) => {
         setFromLocationList([])
         setToLocationList([])
     }
-   
     const editProduct = (id) => {
         const data=products.filter(each=>(
             each.driverId===id
@@ -267,16 +249,7 @@ const CabUserTable = (props) => {
         }
         return index;
     }
-    const createId = () => {
-        let id = '';
-        let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
-    }
     function handleChangeCabDetails(e){
-       
         setCabDetailsFile(e.target.files[0])
     }
     function importCSVCabDetail(){
@@ -297,10 +270,8 @@ const CabUserTable = (props) => {
                 // const cudata=[each.driverId, each.email,each.availableStatus,each.mobileNo,each.gender, each.name]
                 return{ driverId: each.driverId, email: each.email, availableStatus: each.availableStatus,  mobileNo: each.mobileNo, gender: each.gender, name: each.name}
             })
-           
             const uploadData={CabDetailsDatas,CabUserDatas}
             ImportCabDetail(uploadData).then(res=>{
-              
                 const userDataImport=res.data.importCabUser
                 const cabDataImport=res.data.importDetails
                 const _products = [...userDataImport,...products ];
@@ -318,14 +289,6 @@ const CabUserTable = (props) => {
         setDeleteProductsDialog(true);
     }
     const deleteSelectedProducts = () => {
-        const data = {
-            id: "asdf",
-        }
-        const ids = selectedProducts.map(each => {
-            var data = { "_id": each._id }
-            return data
-        })
-
         let _products = products.filter(val => !selectedProducts.includes(val));
         setProducts(_products);
         setDeleteProductsDialog(false);
@@ -449,9 +412,6 @@ const CabUserTable = (props) => {
       function removeTo(index) {
         setToLocationList(toLocationList.filter((el, i) => i !== index))
       }
-      function fromLocationTags() {
-        return product.cabData.fromLocationList
-      }
     return (
         <Context.Consumer>
             {value => {
@@ -556,10 +516,10 @@ const CabUserTable = (props) => {
                             <label htmlFor='seats'>No Seats</label>
                             <div className="formGrid">
                               <select className="form-select" aria-label="Default select example" onChange={(e) =>  onInputChange(e, 'seats')}>
-                                <option defaultValue={eachCabDetail.seats===""} >Select No. of seats</option>
-                                <option defaultValue={eachCabDetail.seats==="4"} value="4">4</option>
-                                <option defaultValue={eachCabDetail.seats==="5"} value="5">5</option>
-                                <option  defaultValue={eachCabDetail.seats==="6"} value="6">6</option>
+                                <option checked={eachCabDetail.seats===""} >Select No. of seats</option>
+                                <option checked={eachCabDetail.seats==="4"} value="4">4</option>
+                                <option checked={eachCabDetail.seats==="5"} value="5">5</option>
+                                <option  checked={eachCabDetail.seats==="6"} value="6">6</option>
                               </select>
                             </div>
                           </div>

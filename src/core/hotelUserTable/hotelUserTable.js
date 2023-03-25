@@ -6,26 +6,12 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-import { FileUpload } from 'primereact/fileupload';
-import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
-import { InputTextarea } from 'primereact/inputtextarea';
 import { RadioButton } from 'primereact/radiobutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
-import { ApiCapUser } from '../../services/apiCapRegister/apiCapRegister';
-import { GetUserDetailsApi } from '../../services/UserService/UserService';
-import { DeleteUserApi } from '../../services/UserService/UserService';
-import { UserService } from '../../services/UserService/UserService';
-import { DeleteCabUserApi } from '../../services/apiCapRegister/apiCapRegister';
-import { UpdateCabUserApi } from '../../services/apiCapRegister/apiCapRegister';
-import { DeleteMultipleCabUserApi } from '../../services/apiCapRegister/apiCapRegister';
-import { CabService } from '../../services/apiCapRegister/apiCapRegister';
 import 'primeicons/primeicons.css';
-import { DeleteMultipleUserApi } from '../../services/UserService/UserService';
-import { UpdateUserApi } from '../../services/UserService/UserService';
-import { elementAcceptingRef } from '@mui/utils';
 import Context from '../../services/Context/Context';
 import { getHotelDetails, importHotel } from '../../services/Api.Hotel.Service/Api.Hotel.Service';
 import { registerHotel } from '../../services/Api.Hotel.Service/Api.Hotel.Service';
@@ -33,9 +19,6 @@ import { updateHotelDetails } from '../../services/Api.Hotel.Service/Api.Hotel.S
 import { deleteHotel } from '../../services/Api.Hotel.Service/Api.Hotel.Service';
 import axios from 'axios';
 import { parse } from 'papaparse';
-
-
-
 const HotelUserTable = () => {
     let emptyProduct = {
         _id: '',
@@ -69,15 +52,9 @@ const HotelUserTable = () => {
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
-    const [fromLocationList, setFromLocationList] = useState([])
-    const [toLocationList, setToLocationList] = useState([])
-    const [fromlocation, setFromlocation] = useState("")
-    const [toLocation, setToLocation] = useState("")
     const [show_from_address, setshow_from_address] = useState(Boolean)
     const [show_to_address, setshow_to_address] = useState(Boolean)
-    const [ACfromlocation, setACfromlocation] = useState([]);
     const [ACtolocation, setACtolocation] = useState([]);
-    const [showAcCharges, setShowAcCharges] = useState(false)
     const [amenitiesList, setamenitiesList] = useState([])
     const [amenities, setamenities] = useState((""))
     const [location, setLocation] = useState((""))
@@ -117,17 +94,8 @@ const HotelUserTable = () => {
         })
         setLoad(true)
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-    const fromvalue = async (data) => {
-        setFromlocation(data)
-        const request = await axios.get('https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=' + fromlocation + '&+category=&outFields=*&forStorage=false&f=pjson')
-        setACfromlocation(request.data.candidates)
-        setshow_from_address(true);
-    }
     const getFromlocation = (data) => {
         setamenitiesList([...amenitiesList, data])
-    }
-    const formatCurrency = (value) => {
-        return value.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
     }
     const openNew = () => {
         setProduct(emptyProduct);
@@ -135,7 +103,6 @@ const HotelUserTable = () => {
         setamenitiesList([])
         setSubmitted(false);
         setProductDialog(true);
-        setShowAcCharges(false)
         setLocation('')
     }
     const hideDialog = () => {
@@ -153,11 +120,6 @@ const HotelUserTable = () => {
         let _products = [...products];
         let _hotelDatas = [...hotelDatas]
         let _product = { ...product };
-        let _eachHotelDetail = { ...eachHotelDetail }
-        const index = findIndexById(product.hotelId);
-        const cabIndex = findIndexByIdCab(eachHotelDetail.hotelId)
-        // _products[index] = _product;
-        // _hotelDatas[cabIndex] = _eachHotelDetail
         const isUpdated = products.filter(each => each._id === _product._id)
         const isUpdatedCab = hotelDatas.filter(each => each._id === eachHotelDetail._id)
         if (isUpdated.length === 0 || isUpdatedCab.length === 0) {
@@ -209,11 +171,12 @@ const HotelUserTable = () => {
                 hotelId: product.hotelId
             }
             function check(a, b) {
-                if (a === null) {
-                    return b
+                if (a) {
+                    return a
                 }
-                return a
+               return b
             }
+            console.log(eachHotelDetail)
             const roomsList = {
                 deluxeRooms: { rooms: check(deluxeRooms, eachHotelDetail.roomsList.deluxeRooms.rooms), price: check(pricePerDayDeluxe, eachHotelDetail.roomsList.deluxeRooms.price), adult: check(adultDeluxe, eachHotelDetail.roomsList.deluxeRooms.adult), child: check(childDeluxe, eachHotelDetail.roomsList.deluxeRooms.child), type: 'Deluxe Room', sqft: check(sqftDeluxe, eachHotelDetail.roomsList.deluxeRooms.sqft) },
                 nonDeluxeRooms: { rooms: check(nonDeluxeRooms, eachHotelDetail.roomsList.nonDeluxeRooms.rooms), price: check(pricePerDayNonDeluxe, eachHotelDetail.roomsList.nonDeluxeRooms.price), adult: check(adultNonDeluxe, eachHotelDetail.roomsList.nonDeluxeRooms.adult), child: check(childNonDeluxe, eachHotelDetail.roomsList.nonDeluxeRooms.child), type: 'Non-Deluxe Room', sqft: check(sqftNonDeluxe, eachHotelDetail.roomsList.nonDeluxeRooms.sqft) },
@@ -234,7 +197,7 @@ const HotelUserTable = () => {
                 personalDetails: personalDetails,
                 hotelDetails: hotelDetails
             }
-
+            console.log(hotelDetails)
             updateHotelDetails(data).then(res => {
                 const index = findIndexByIdCab(eachHotelDetail.driverId)
                 _hotelDatas[index] = eachHotelDetail
@@ -243,13 +206,10 @@ const HotelUserTable = () => {
                 setEachHotelDetail(emptyData)
                 setProduct(emptyProduct);
             }).catch(err => {
-
             })
             toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
         }
         setProductDialog(false);
-        setFromLocationList([])
-        setToLocationList([])
     }
     const editProduct = (id) => {
         const data = products.filter(each => (
@@ -258,13 +218,13 @@ const HotelUserTable = () => {
         const hData = hotelDatas.filter(each => (
             each.hotelId === id
         ))
+        console.log(hData)
         setamenitiesList(hData[0].amenitiesList)
         setLocation(hData[0].location)
         setProduct(...data);
         setEachHotelDetail(...hData);
         setProductDialog(true);
     }
-
     const confirmDeleteProduct = (product) => {
         setProduct(product);
         setDeleteProductDialog(true);
@@ -278,16 +238,6 @@ const HotelUserTable = () => {
             toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
         })
     }
-    const findIndexById = (id) => {
-        let index = -1;
-        for (let i = 0; i < products.length; i++) {
-            if (products[i].driverId === id) {
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
     const findIndexByIdCab = (id) => {
         let index = -1;
         for (let i = 0; i < hotelDatas.length; i++) {
@@ -298,44 +248,9 @@ const HotelUserTable = () => {
         }
         return index;
     }
-    const createId = () => {
-        let id = '';
-        let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
-    }
     function handleChangeHotelDetails(e){
-       
         setHotelDetailsFile(e.target.files[0])
     }
-    const importCSV = (e) => {
-        const file = e.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const csv = e.target.result;
-            const data = csv.split('\n');
-            // Prepare DataTable
-            const cols = data[0].replace(/['"]+/g, '').split(',');
-            data.shift();
-            const importedData = data.map(d => {
-                d = d.split(',');
-                const processedData = cols.reduce((obj, c, i) => {
-                    c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
-                    obj[c] = d[i].replace(/['"]+/g, '');
-                    (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
-                    return obj;
-                }, {});
-                processedData['id'] = createId();
-                return processedData;
-            });
-            const _products = [...products, ...importedData];
-            setProducts(_products);
-        };
-        reader.readAsText(file, 'UTF-8');
-    }
-
     const importCSVHotelDetail=()=>{
         const reader= new FileReader()
         reader.onload=async({target})=>{
@@ -347,21 +262,19 @@ const HotelUserTable = () => {
                 const amenitiesList=each.amenitiesList.split(';')
                 const roomsList={deluxeRooms:{rooms:each.deluxeRooms,price: each.pricePerDayDeluxe, adult: each.adultDeluxe, child: each.childDeluxe, type:'Deluxe Room',sqft: each.sqftDeluxe }, 
                 nonDeluxeRooms:{rooms: each.nonDeluxeRooms ,price: each.pricePerDayNonDeluxe , adult:each.adultNonDeluxe, child:each.childNonDeluxe, type:'Non-Deluxe Room', sqft:each.sqftNonDeluxe}, 
-                suiteRooms:{rooms: each.suiteRooms, price: each.pricePerDaySuite,  adult:each.adultSuite, child:childSuite, type:'Suite Room', sqftSuite},
+                suiteRooms:{rooms: each.suiteRooms, price: each.pricePerDaySuite,  adult:each.adultSuite, child:each.childSuite, type:'Suite Room', sqft: each.sqftSuite},
                  familyRooms:{rooms:each.familyRooms, price:each.pricePerDayFamily,  adult:each.adultFamily, child:each.childFamily, type:'Family Room',sqft: each.sqftFamily},
                   tripleRooms:{rooms :each.tripleRooms,price:each.pricePerDayTriple,  adult:each.adultTriple, child:each.childTriple, type:'Triple Room', sqft: each.sqftTriple}
                 }
                 return {hotelId:each.hotelId, hotelName:each.hotelName, availableStatus:each.availableStatus, roomsList:roomsList, amenitiesList:amenitiesList, location:each.location}
             })
             const hotelUserData=data.map(each=>{
-               
                 return {hotelId:each.hotelId, email:each.email, name:each.name, gender:each.gender,availableStatus:each.availableStatus,mobileNo:each.mobileNo}
             })
             const uploadData={hotelDetailsData, hotelUserData}
             console.log(uploadData)
            const importBackend= await importHotel(uploadData)
            console.log(importBackend)
-           
            const userDataImport=importBackend.data.importUser
            const hotelDataImport=importBackend.data.importHotelDetails
            const _products = [...userDataImport,...products ];
@@ -369,29 +282,12 @@ const HotelUserTable = () => {
            setProducts(_products)
            sethotelDatas(_hotelDatas)
         }
-
-
         reader.readAsText(hotelDetailsFile)
     }
-
-
     const exportCSV = () => {
         dt.current.exportCSV();
     }
-    const confirmDeleteSelected = () => {
-        setDeleteProductsDialog(true);
-    }
     const deleteSelectedProducts = () => {
-        const data = {
-            id: "asdf",
-        }
-        const ids = selectedProducts.map(each => {
-            var data = { "_id": each._id }
-            return data
-        })
-        DeleteMultipleUserApi(ids).then(res => {
-
-        })
         let _products = products.filter(val => !selectedProducts.includes(val));
         setProducts(_products);
         setDeleteProductsDialog(false);
@@ -416,25 +312,6 @@ const HotelUserTable = () => {
             _data[username] = val
         } else {
             _product[username] = val;
-        }
-        if (username === "type") {
-            if (val === 'Ac') {
-                setShowAcCharges(true)
-            } else {
-                setShowAcCharges(false)
-            }
-        }
-        setEachHotelDetail(_data)
-        setProduct(_product);
-    }
-    const onInputNumberChange = (e, name) => {
-        let _product = { ...product };
-        let _data = { ...eachHotelDetail }
-        const val = e.value || 0;
-        if (_product[name] === undefined) {
-            _data[name] = val
-        } else {
-            _product[name] = val;
         }
         setEachHotelDetail(_data)
         setProduct(_product);
@@ -508,12 +385,6 @@ const HotelUserTable = () => {
         setLocation(data.address)
         setshow_to_address(false);
     }
-    function removeTo(index) {
-        setToLocationList(toLocationList.filter((el, i) => i !== index))
-    }
-    function fromLocationTags() {
-        return product.cabData.fromLocationList
-    }
     return (
         <Context.Consumer>
             {value => {
@@ -537,7 +408,7 @@ const HotelUserTable = () => {
                                 <Column className="dark-bg" body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                             </DataTable>
                         </div>
-                        <Dialog visible={productDialog}  style={{ width: '450px' }} header="Cab User Details" modal className="p-fluid dark-bg " footer={productDialogFooter} onHide={hideDialog}>
+                        <Dialog visible={productDialog}  style={{ width: '450px' }} header="Hotel User Details" modal className="p-fluid dark-bg " footer={productDialogFooter} onHide={hideDialog}>
                             <div className="field ">
                                 <label htmlFor="username">Name</label>
                                 <InputText id="username" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus style={{ height: '40px' }} className={classNames({ 'p-invalid': submitted && !product.name })} />

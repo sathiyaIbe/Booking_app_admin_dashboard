@@ -83,9 +83,7 @@ const AdminDashboard = () => {
     const bookingDataCount = bookingNewData()
     const activeDataCount = activeNewData()
     const inActiveDataCount = inActiveNewData()
-    
     const navigate = useNavigate()
-
     const chronoData = [
         {
             title: "25 May 2020",
@@ -185,8 +183,6 @@ const AdminDashboard = () => {
             }
         ]
     }
-
-
     let newStylesData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June',],
         datasets: [
@@ -260,7 +256,6 @@ const AdminDashboard = () => {
             }
         ]
     }
-
     const statusBodyTemplate = (rowData) => {
         return <span className={`product-badge status-${rowData.status}`}>{rowData.status}</span>;
     }
@@ -319,7 +314,6 @@ const AdminDashboard = () => {
                                                     <Column field="status" header="Status" body={statusBodyTemplate}></Column>
                                                 </DataTable>
                                             </div>
-
                                         </div>
                                         <div className="static-table-cotainer">
                                             <h3 className='card-main-heading'>User Status</h3>

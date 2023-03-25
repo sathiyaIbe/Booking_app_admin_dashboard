@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import './DataTables.css'
-import React, { useState, ChangeEvent, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -11,14 +11,9 @@ import { InputText } from 'primereact/inputtext';
 import { RadioButton } from 'primereact/radiobutton';
 import { Dialog } from 'primereact/dialog';
 import { GetUser , UpdateUser,RegisterUser,DeleteUser,ImportUser} from '../../services/UserService/UserService';
-
-
 import 'primeicons/primeicons.css';
-
-import { elementAcceptingRef } from '@mui/utils';
 import Context from '../../services/Context/Context';
 import { parse } from 'papaparse';
-
 const DataTables = (props) => {
     let emptyProduct = {
         userId: '',
@@ -33,7 +28,6 @@ const DataTables = (props) => {
     const [load, setLoad] = useState(false)
     const [productDialog, setProductDialog] = useState(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState(false);
-    const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
     const [product, setProduct] = useState(emptyProduct);
     const [selectedProducts, setSelectedProducts] = useState(null);
     const [submitted, setSubmitted] = useState(false);
@@ -50,7 +44,6 @@ const DataTables = (props) => {
         })
         setLoad(true)
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
     const openNew = () => {
         setProduct(emptyProduct);
         setSubmitted(false);
@@ -63,9 +56,7 @@ const DataTables = (props) => {
     const hideDeleteProductDialog = () => {
         setDeleteProductDialog(false);
     }
-    const hideDeleteProductsDialog = () => {
-        setDeleteProductsDialog(false);
-    }
+   
     const saveProduct = () => {
         setSubmitted(true);
         let _products = [...products];
@@ -85,7 +76,6 @@ const DataTables = (props) => {
             console.log(details)
             RegisterUser(details).then(res => {
                 const data = res.data
-                console.log(data)
                
                 _products.push({ ...data });
                 console.log(_products)
@@ -95,11 +85,7 @@ const DataTables = (props) => {
             toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000, });
         }
         else {
-            const data = {
-                username: _product.username,
-                status: _product.status,
-                email: _product.email,
-            }
+            
             UpdateUser(_product).then(res => {
                 const dataId = res.data._id
                 const id = products.findIndex(each => {
@@ -126,7 +112,7 @@ const DataTables = (props) => {
         setDeleteProductDialog(true);
     }
     const deleteProduct = () => {
-        const data={userId:product.userId}
+      
         DeleteUser(product.userId).then(res => {
             let _products = products.filter(val => val._id !== product._id);
             setProducts(_products);
@@ -152,8 +138,6 @@ const DataTables = (props) => {
         reader.onload = async ({ target }) => {
             const csv = parse(target.result, { header: true });
             const parsedData = csv?.data;
-            const columns = Object.keys(parsedData[0]);
-            const data = parsedData.slice(0, -1)
             ImportUser(parsedData.slice(0, -1)).then(res => {
                 const _products = [...products, ...res.data];
                 setProducts(_products);
@@ -164,25 +148,7 @@ const DataTables = (props) => {
     const exportCSV = () => {
         dt.current.exportCSV();
     }
-    const confirmDeleteSelected = () => {
-        setDeleteProductsDialog(true);
-    }
-    // const deleteSelectedProducts = () => {
-    //     const data = {
-    //         id: "asdf",
-    //     }
-    //     const ids = selectedProducts.map(each => {
-    //         var data = { "_id": each._id }
-    //         return data
-    //     })
-    //     DeleteMultipleUserApi(ids).then(res => {
-    //     })
-    //     let _products = products.filter(val => !selectedProducts.includes(val));
-    //     setProducts(_products);
-    //     setDeleteProductsDialog(false);
-    //     setSelectedProducts(null);
-    //     toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
-    // }
+
     const onCategoryChange = (e) => {
         let _product = { ...product };
         _product['otp_status'] = e.value;
@@ -199,17 +165,11 @@ const DataTables = (props) => {
         _product[`${username}`] = val;
         setProduct(_product);
     }
-    const onInputNumberChange = (e, name) => {
-        const val = e.value || 0;
-        let _product = { ...product };
-        _product[`${name}`] = val;
-        setProduct(_product);
-    }
+
     const leftToolbarTemplate = () => {
         return (
             <React.Fragment>
                 <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew} />
-              
             </React.Fragment>
         )
     }
@@ -229,7 +189,6 @@ const DataTables = (props) => {
         )
     }
     const statusBodyTemplate = (rowData) => {
-       
         return <span className={`product-badge status-${rowData.otp_status}`}>{rowData.otp_status}</span>;
     }
     const actionBodyTemplate = (rowData) => {
@@ -282,7 +241,6 @@ const DataTables = (props) => {
                                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users"
                                 globalFilter={globalFilter} header={header} responsiveLayout="scroll" >
-                            
                                 <Column className="" field="userId" header="User Id" sortable style={{ minWidth: '12rem' }}></Column>
                                 {/* //<Column field="createdAt" header="Date Created" sortable style={{ minWidth: '12rem' }}></Column> */}
                                 <Column className="" field="Name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
@@ -310,7 +268,6 @@ const DataTables = (props) => {
                                 <div className='input-group'>
                                     <div className='text-end'>
                                 {showPassword ? <i className="bi bi-eye-slash input-group-text " onClick={()=>setShowPassword(!showPassword)}></i>:<i className="bi bi-eye input-group-text"  onClick={()=>setShowPassword(!showPassword)}></i>}</div>
-
                                 <InputText id="password" value={product.Password} type={showPassword?"text" :'password'}  onChange={(e) => onInputChange(e, 'Password')} required /> 
                                 </div>
                             </div>
