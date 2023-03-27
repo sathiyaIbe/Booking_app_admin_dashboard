@@ -171,12 +171,11 @@ const HotelUserTable = () => {
                 hotelId: product.hotelId
             }
             function check(a, b) {
-                if (a) {
+                if (a || a===0) {
                     return a
                 }
                return b
             }
-            console.log(eachHotelDetail)
             const roomsList = {
                 deluxeRooms: { rooms: check(deluxeRooms, eachHotelDetail.roomsList.deluxeRooms.rooms), price: check(pricePerDayDeluxe, eachHotelDetail.roomsList.deluxeRooms.price), adult: check(adultDeluxe, eachHotelDetail.roomsList.deluxeRooms.adult), child: check(childDeluxe, eachHotelDetail.roomsList.deluxeRooms.child), type: 'Deluxe Room', sqft: check(sqftDeluxe, eachHotelDetail.roomsList.deluxeRooms.sqft) },
                 nonDeluxeRooms: { rooms: check(nonDeluxeRooms, eachHotelDetail.roomsList.nonDeluxeRooms.rooms), price: check(pricePerDayNonDeluxe, eachHotelDetail.roomsList.nonDeluxeRooms.price), adult: check(adultNonDeluxe, eachHotelDetail.roomsList.nonDeluxeRooms.adult), child: check(childNonDeluxe, eachHotelDetail.roomsList.nonDeluxeRooms.child), type: 'Non-Deluxe Room', sqft: check(sqftNonDeluxe, eachHotelDetail.roomsList.nonDeluxeRooms.sqft) },
@@ -197,7 +196,6 @@ const HotelUserTable = () => {
                 personalDetails: personalDetails,
                 hotelDetails: hotelDetails
             }
-            console.log(hotelDetails)
             updateHotelDetails(data).then(res => {
                 const index = findIndexByIdCab(eachHotelDetail.driverId)
                 _hotelDatas[index] = eachHotelDetail
@@ -218,7 +216,6 @@ const HotelUserTable = () => {
         const hData = hotelDatas.filter(each => (
             each.hotelId === id
         ))
-        console.log(hData)
         setamenitiesList(hData[0].amenitiesList)
         setLocation(hData[0].location)
         setProduct(...data);
@@ -524,7 +521,7 @@ const HotelUserTable = () => {
                                         <label htmlFor="hotelName" className='mt-1 col-6'>No Of Child</label>
                                         <InputNumber className='col-6 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.deluxeRooms?.child} onChange={(e) => setChildDeluxe(e.value)} required />
                                         <label htmlFor="hotelName" className='mt-1 col-6'>No Of Sqft</label>
-                                        <InputText className='col-5 ms-3 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.deluxeRooms?.sqft} onChange={(e) => setSqftDeluxe(e.target.value)} required />
+                                        <InputNumber className='col-6  mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.deluxeRooms?.sqft} onChange={(e) => setSqftDeluxe(e.value)} required />
                                         <label htmlFor="hotelName" className='mt-1 col-6'>Price Per Night in Rs</label>
                                         <InputNumber className='col-6 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.deluxeRooms?.price} onChange={(e) => setPricePerDayDeluxe(e.value)} required />
                                     </div>
@@ -539,7 +536,7 @@ const HotelUserTable = () => {
                                         <label htmlFor="hotelName" className='mt-1 col-6'>No Of Child</label>
                                         <InputNumber className='col-6 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.nonDeluxeRooms?.child} onChange={(e) => setChildNonDeluxe(e.value)} required />
                                         <label htmlFor="hotelName" className='mt-1 col-6'>No Of Sqft</label>
-                                        <InputText className='col-5 ms-3 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.nonDeluxeRooms?.sqft} onChange={(e) => setSqftNonDeluxe(e.target.value)} required />
+                                        <InputNumber className='col-6  mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.nonDeluxeRooms?.sqft} onChange={(e) => setSqftNonDeluxe(e.value)} required />
                                         <label htmlFor="hotelName" className='mt-1 col-6'>Price Per Night in Rs</label>
                                         <InputNumber className='col-6 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.nonDeluxeRooms?.price} onChange={(e) => setPricePerDayNonDeluxe(e.value)} required />
                                     </div>
@@ -554,7 +551,7 @@ const HotelUserTable = () => {
                                         <label htmlFor="hotelName" className='mt-1 col-6'>No Of Child</label>
                                         <InputNumber className='col-6 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.suiteRooms?.child} onChange={(e) => setChildSuite(e.value)} required />
                                         <label htmlFor="hotelName" className='mt-1 col-6'>No Of Sqft</label>
-                                        <InputText className='col-5 ms-3 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.suiteRooms?.sqft} onChange={(e) => setSqftSuite(e.target.value)} required />
+                                        <InputNumber className='col-6  mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.suiteRooms?.sqft} onChange={(e) => setSqftSuite(e.value)} required />
                                         <label htmlFor="hotelName" className='mt-1 col-6'>Price Per Night in Rs</label>
                                         <InputNumber className='col-6 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.suiteRooms?.price} onChange={(e) => setPricePerDaySuite(e.value)} required />
                                     </div>
@@ -569,7 +566,7 @@ const HotelUserTable = () => {
                                         <label htmlFor="hotelName" className='mt-1 col-6'>No Of Child</label>
                                         <InputNumber className='col-6 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.familyRooms?.child} onChange={(e) => setChildFamily(e.value)} required />
                                         <label htmlFor="hotelName" className='mt-1 col-6'>No Of Sqft</label>
-                                        <InputText className='col-5 ms-3 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.familyRooms?.sqft} onChange={(e) => setSqftFamily(e.value)} required />
+                                        <InputNumber className='col-6  mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.familyRooms?.sqft} onChange={(e) => setSqftFamily(e.value)} required />
                                         <label htmlFor="hotelName" className='mt-1 col-6'>Price Per Night in Rs</label>
                                         <InputNumber className='col-6 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.familyRooms?.price} onChange={(e) => setPricePerDayFamily(e.value)} required />
                                     </div>
@@ -584,7 +581,7 @@ const HotelUserTable = () => {
                                         <label htmlFor="hotelName" className='mt-1 col-6'>No Of Child</label>
                                         <InputNumber className='col-6 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.tripleRooms?.child} onChange={(e) => setChildTriple(e.value)} required />
                                         <label htmlFor="hotelName" className='mt-1 col-6'>No Of Sqft</label>
-                                        <InputText className='col-5 ms-3 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.tripleRooms?.sqft} onChange={(e) => setSqftTriple(e.value)} required />
+                                        <InputNumber className='col-6  mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.tripleRooms?.sqft} onChange={(e) => setSqftTriple(e.value)} required />
                                         <label htmlFor="hotelName" className='mt-1 col-6'>Price Per Night in Rs</label>
                                         <InputNumber className='col-6 mb-2 ' style={{ height: '40px' }} value={eachHotelDetail.roomsList?.tripleRooms?.price} onChange={(e) => setPricePerDayTriple(e.value)} required />
                                     </div>

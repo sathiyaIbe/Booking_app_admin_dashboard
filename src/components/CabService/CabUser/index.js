@@ -1,14 +1,10 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../../core/header/header';
-import Sidebar from '../../../core/Sidebar/Sidebar';
-import { AiOutlineMenu } from 'react-icons/ai'
-import { RxCross1 } from 'react-icons/rx'
-import DataTables from '../../../core/DataTables/DataTables';
 import Context from '../../../services/Context/Context';
 import './index.css'
 import { ApiCapGet } from '../../../services/apiCapRegister/apiCapRegister';
-import CabUserTable from '../../../core/CabUserTable/CabUserTable';
+import CabUserTable from '../../CabUserTable/CabUserTable';
 const CabUser = () => {
   return (
     <Context.Consumer>

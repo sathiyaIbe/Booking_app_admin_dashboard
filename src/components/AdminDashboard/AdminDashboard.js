@@ -2,7 +2,6 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Chart } from 'primereact/chart';
 import './AdminDashboard.css';
-import { useNavigate } from 'react-router-dom'
 import Header from '../../core/header/header';
 import { BsCurrencyDollar } from 'react-icons/bs'
 import { MdOutlineFlight } from 'react-icons/md'
@@ -83,7 +82,6 @@ const AdminDashboard = () => {
     const bookingDataCount = bookingNewData()
     const activeDataCount = activeNewData()
     const inActiveDataCount = inActiveNewData()
-    const navigate = useNavigate()
     const chronoData = [
         {
             title: "25 May 2020",
