@@ -3,7 +3,7 @@ import './HotelBooking.css';
 import React from 'react';
 import Header from '../../../core/header/header';
 import Context from '../../../services/Context/Context';
-import HotelBookingTable from '../../../core/HotelBookingTable/HotelBookingTable'
+import HotelBookingTable from '../../HotelBookingTable/HotelBookingTable'
 const HotelBooking = () =>{
   return(
 <Context.Consumer>

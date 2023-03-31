@@ -163,7 +163,7 @@ const CabUserTable = (props) => {
                 availableStatus: product.availableStatus,
                 mobileNo:product.mobileNo,
                 gender:product.gender,
-                _id:product._id
+                driverId:product.driverId
             }
             const cabDetails={
                 carModel:eachCabDetail.carModel,
@@ -177,7 +177,7 @@ const CabUserTable = (props) => {
                 pricePerKm:eachCabDetail.pricePerKm,
                 acPrice:eachCabDetail.acPrice,
                 extraKmCharges:eachCabDetail.extraKmCharges,
-                _id:eachCabDetail._id
+                
             }
             const data = {
                 personalDetails: personalDetails,
@@ -339,8 +339,8 @@ const CabUserTable = (props) => {
     const leftToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew} />
-                <Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={confirmDeleteSelected} disabled={!selectedProducts || !selectedProducts.length} />
+                <Button label="New" icon="pi pi-plus" className="p-button-success mr-2 sm" onClick={openNew} />
+                <Button label="Delete" icon="pi pi-trash" className="p-button-danger "  onClick={confirmDeleteSelected} disabled={!selectedProducts || !selectedProducts.length} />
             </React.Fragment>
         )
     }
@@ -350,7 +350,7 @@ const CabUserTable = (props) => {
                  {/* <FileUpload mode="basic" name="demo[]" auto url={"/api/upload"} accept=".csv" chooseLabel="Import" className="mr-2 inline-block" onUpload={importCSV} /> */}
                 <div className='flex mt-3 '>
                  <input type="file"  accept=".csv"  onChange={handleChangeCabDetails}/>
-                <Button className=' mt-3 me-3 ms-0 p-button-success ' icon="pi pi-download"  onClick={importCSVCabDetail}  label='Import '/> 
+                <Button className=' mt-3 me-3 ms-0 p-button-success  ' icon="pi pi-download"  onClick={importCSVCabDetail}  label='Import '/> 
                 <Button label="Export" icon="pi pi-upload" className="p-button-help ms-0" onClick={exportCSV} />
                 </div>
             </React.Fragment>
@@ -482,7 +482,7 @@ const CabUserTable = (props) => {
                             </div>
                             <div className="field">
                                 <label htmlFor="carType">Car Type</label>
-                                {/* <div className="formgrid grid">
+                                <div className="formgrid grid">
                                     <select className="form-select" aria-label="Default select example"   onChange={(e) => onInputChange(e, 'carType')}>
                                         <option defaultChecked>Select Car type</option>
                                         <option selected={eachCabDetail.carType==="SUV"} value="SUV"  >SUV</option>
@@ -490,15 +490,15 @@ const CabUserTable = (props) => {
                                         <option selected={eachCabDetail.carType==="XUV"} value="XUV">XUV</option>
                                         <option selected={eachCabDetail.carType==="Other"} value="Other">Other</option>
                                     </select>
-                                </div> */}
+                                </div>
                             </div>
                             <div className="field">
                                 <label htmlFor='fuelType'>Fuel Type</label>
                                 <div className="formgrid grid">
                                     <select className="form-select" aria-label="Default select example" onChange={(e) => onInputChange(e, 'fuelType')}>
-                                        <option  defaultValue={eachCabDetail.fuelType===""}>Select Fuel type</option>
-                                        <option defaultValue={eachCabDetail.fuelType==="Petrol"} value="Petrol"  >Petrol</option>
-                                        <option defaultValue={eachCabDetail.fuelType==="Diesel"} value="Diesel">Diesel</option>
+                                        <option defaultChecked>Select Fuel type</option>
+                                        <option selected={eachCabDetail.fuelType==="Petrol"} value="Petrol"  >Petrol</option>
+                                        <option selected={eachCabDetail.fuelType==="Diesel"} value="Diesel">Diesel</option>
                                     </select>
                                 </div>
                             </div>
@@ -506,9 +506,9 @@ const CabUserTable = (props) => {
                             <label htmlFor='type'>Type</label>
                             <div className="formGrid">
                               <select className="form-select" aria-label="Default select example" onChange={(e) => onInputChange(e, 'type')}>
-                                <option defaultValue={eachCabDetail.type===""} >Select Type</option>
-                                <option defaultValue={eachCabDetail.type==="Ac"} value="Ac"  >AC</option>
-                                <option defaultValue={eachCabDetail.type==="NonAc"} value="NonAc">Non AC</option>
+                                <option defaultChecked >Select Type</option>
+                                <option selected={eachCabDetail.type==="Ac"} value="Ac"  >AC</option>
+                                <option selected={eachCabDetail.type==="NonAc"} value="NonAc">Non AC</option>
                               </select>
                             </div>
                           </div>
@@ -516,10 +516,10 @@ const CabUserTable = (props) => {
                             <label htmlFor='seats'>No Seats</label>
                             <div className="formGrid">
                               <select className="form-select" aria-label="Default select example" onChange={(e) =>  onInputChange(e, 'seats')}>
-                                <option checked={eachCabDetail.seats===""} >Select No. of seats</option>
-                                <option checked={eachCabDetail.seats==="4"} value="4">4</option>
-                                <option checked={eachCabDetail.seats==="5"} value="5">5</option>
-                                <option  checked={eachCabDetail.seats==="6"} value="6">6</option>
+                                <option defaultChecked >Select No. of seats</option>
+                                <option selected={eachCabDetail.seats==="4"} value="4">4</option>
+                                <option selected={eachCabDetail.seats==="5"} value="5">5</option>
+                                <option  selected={eachCabDetail.seats==="6"} value="6">6</option>
                               </select>
                             </div>
                           </div>

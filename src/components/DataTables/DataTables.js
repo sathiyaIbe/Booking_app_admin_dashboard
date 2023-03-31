@@ -288,11 +288,11 @@ const DataTables = (props) => {
                                 <label className="mb-3">Gender</label>
                                 <div className="formgrid grid">
                                     <div className="field-radiobutton col-6">
-                                        <RadioButton inputId="category3" name="Gender" value="Male" onChange={onCategoryChangeGender} checked={product.Gender === 'Male'} />
+                                        <RadioButton inputId="category3" name="Gender" value="Male" onChange={onCategoryChangeGender} checked={product.Gender.toUpperCase() === 'MALE'} />
                                         <label htmlFor="category3">Male</label>
                                     </div>
                                     <div className="field-radiobutton col-6">
-                                        <RadioButton inputId="category4" name="Gender" value="Female" onChange={onCategoryChangeGender} checked={product.Gender === 'Female'} />
+                                        <RadioButton inputId="category4" name="Gender" value="Female" onChange={onCategoryChangeGender} checked={product.Gender.toUpperCase() === 'FEMALE'} />
                                         <label htmlFor="category4">Female</label>
                                     </div>
                                 </div>
