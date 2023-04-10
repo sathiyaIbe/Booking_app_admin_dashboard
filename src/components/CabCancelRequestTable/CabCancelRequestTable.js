@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './CabBookingDataTable.css';
+import './CabCancelRequestTable.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -9,7 +9,7 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import 'primeicons/primeicons.css';
 import { CabBooking } from '../../services/apiCapRegister/apiCapRegister';
-const CabBookingDataTable = (props) =>{
+const CabCancelRequestTable = () => {
   let emptyProduct = {
     _id:'',
     username: '',
@@ -29,9 +29,8 @@ useEffect(() => {
   CabBooking().then(res=>{
     const data=res.data
     console.log(res.data)
-  const datas=  data.map(each=>{
-        const id= Number(data.indexOf(each))+1
-        return {...each,id}
+  const datas=  data.filter(each=>{
+       return each.journey==="canceled"
     })
     setProducts(datas)
   })
@@ -66,7 +65,7 @@ const header = (
 return (
     
   load &&
-    <div className="datatable-crud-demo " data-testid="CabBookingDataTable">
+    <div className="datatable-crud-demo " data-testid="CabCancelRequestTable">
        
             {/* <Toolbar   className="mb-4 dark-bg " left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar> */}
             <Toast ref={toast}  />
@@ -81,6 +80,7 @@ return (
                 <Column className="dark-bg" field="Email" header="Email" sortable style={{ minWidth: '10rem' }}></Column>
                 <Column className="dark-bg" field="razorpay_payment_id" header="Payement Id" sortable style={{ minWidth: '10rem' }}></Column>
                 <Column className="dark-bg" field="status" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '10rem' }} ></Column>
+                <Column className="dark-bg" field="journey" header="Journey"  sortable style={{ minWidth: '10rem' }} ></Column>
                 <Column className="dark-bg" body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
             </DataTable>
      
@@ -134,6 +134,14 @@ return (
          
 );
        }
-CabBookingDataTable.propTypes = {};
-CabBookingDataTable.defaultProps = {};
-export default CabBookingDataTable;
+// const CabCancelRequestTable = () => (
+//   <div className="CabCancelRequestTable" data-testid="CabCancelRequestTable">
+//     CabCancelRequestTable Component
+//   </div>
+// );
+
+CabCancelRequestTable.propTypes = {};
+
+CabCancelRequestTable.defaultProps = {};
+
+export default CabCancelRequestTable;

@@ -6,6 +6,7 @@ import { CSpinner } from '@coreui/react'
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CabBookingCancel from './components/CabService/CabBookingCancel/CabBookingCancel';
 const  Login =lazy(()=>import('../src/components/Login/Login')) 
 const AdminDashboard =lazy(()=>import('./components/AdminDashboard/AdminDashboard')) 
 const Protected =lazy(()=>import('./services/ProtectedRoute/ProtectedRoute')) 
@@ -16,6 +17,7 @@ const User=lazy(()=>import('./components/User/User'))
 const  ECommerce =lazy(()=> import('./components/ECommerce/ECommerce'))
 const CabBookingTable=lazy(()=>import('./components/CabService/CabBookingTable/CabBookingTable'))
 const HotelBooking =lazy(()=>import('./components/BookingStatus/HotelBooking/HotelBooking'))
+
 function App() {
       const [sidebar, setSidebar]=useState(false)
       const [isDark, setIsDark] = useState(false);
@@ -39,6 +41,7 @@ function App() {
         <Route exact path ='/booking-status' element={<Protected ><BookingStatus /> </Protected>}></Route>
         <Route exact path ='/cab-service/cab-user' element={<Protected ><CabService /> </Protected>}></Route>
         <Route exact path='/cab-service/cab-booking' element={<Protected ><CabBookingTable /> </Protected>}></Route>
+        <Route exact path='/cab-service/cab-booking-cancel' element={<Protected ><CabBookingCancel /> </Protected>}></Route>
         <Route exact path='/hotel/hotelbookings' element={<Protected><HotelBooking /> </Protected>}></Route>
         <Route path='*' element={<NotFound />}></Route>
         </Routes>
