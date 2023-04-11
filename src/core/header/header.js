@@ -19,8 +19,6 @@ import { Button } from 'primereact/button';
 import { icons } from 'react-icons';
 import { Link } from 'react-router-dom';
 import Popup from 'reactjs-popup';
-import ToggleButton from "react-theme-toggle-button";
-import "react-theme-toggle-button/dist/index.css";
 import { InputText } from 'primereact/inputtext';
 import { Menubar } from 'primereact/menubar';
 import AdminDashboard from '../../components/AdminDashboard/AdminDashboard';
@@ -84,7 +82,6 @@ export default Header;
 
     function ss({isDark, changeTheme}) {
       return (<div className='toogle-icon'>
-  <ToggleButton isDark={isDark} onChange={() => changeTheme()} />
 </div>);
     }
   
