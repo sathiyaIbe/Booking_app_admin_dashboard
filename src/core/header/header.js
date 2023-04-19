@@ -23,6 +23,7 @@ import { InputText } from 'primereact/inputtext';
 import { Menubar } from 'primereact/menubar';
 import AdminDashboard from '../../components/AdminDashboard/AdminDashboard';
 import BookingStatus from '../../components/BookingStatus/BookingStatus'
+import AllBooking from '../../components/AllBooking/AllBooking';
 import { SlMenu } from 'react-icons/sl'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';

@@ -47,6 +47,8 @@ export  const Sidebar=({
           </li>
         </ul>
       </li>
+      <Link to='/bookings'>  <button className={`sidebar-link ${isDark && "dark-sidebar-link"}`} type='button' data-bs-dismiss="offcanvas" aria-label="Close" onClick={() => changeSidebar(true)}><AiOutlineUser className='sidebar-icons' />Bookings </button></Link>
+
     </div>
   </Offcanvas>;
 }

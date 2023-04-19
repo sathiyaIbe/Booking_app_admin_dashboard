@@ -436,7 +436,7 @@ const CabUserTable = (props) => {
                                 <Column className="dark-bg" body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                             </DataTable>
                         </div>
-                        <Dialog  visible={productDialog}  header="Cab User Details" modal className="p-fluid dark-bg " footer={productDialogFooter} onHide={hideDialog}>
+                        <Dialog  visible={productDialog}  header="Cab User Details" modal className="w-50 dark-bg " footer={productDialogFooter} onHide={hideDialog}>
                             <div className="field ">
                                 <label htmlFor="username">Name</label>
                                 <InputText id="username" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus style={{height:'40px'}} className={classNames({ 'p-invalid': submitted && !product.name })} />

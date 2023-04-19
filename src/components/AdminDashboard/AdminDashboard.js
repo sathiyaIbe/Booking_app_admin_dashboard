@@ -270,9 +270,9 @@ const AdminDashboard = () => {
                                 <div className={`card-main-container   ${sidebar ? 'sidebar-card-main-container ' : ''}`} >
                                     <div className='card-body-container'>
                                         <div className='dashboard-card-container'>
-                                            <Card className='card' title='Users'>
+                                            <Card className='card ' title='Users'>
                                                 <div className='card-description-container'>
-                                                    <CiUser className='icon-card user' />
+                                                    <CiUser className='icon-card user slideanim' />
                                                     <div>
                                                         <h5 className=" card-title" > {totalUser}</h5>
                                                         <p className='card-subtitle'><span className='subtitle'>12%</span> increase</p>

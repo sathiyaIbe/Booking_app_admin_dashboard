@@ -17,7 +17,7 @@ const User=lazy(()=>import('./components/User/User'))
 const  ECommerce =lazy(()=> import('./components/ECommerce/ECommerce'))
 const CabBookingTable=lazy(()=>import('./components/CabService/CabBookingTable/CabBookingTable'))
 const HotelBooking =lazy(()=>import('./components/BookingStatus/HotelBooking/HotelBooking'))
-
+const AllBooking=lazy(()=>import('./components/AllBooking/AllBooking'))
 function App() {
       const [sidebar, setSidebar]=useState(false)
       const [isDark, setIsDark] = useState(false);
@@ -38,6 +38,7 @@ function App() {
         <Route exact path ='/admin-dashboard' element={<Protected ><AdminDashboard /> </Protected>}></Route>
         <Route exact path ='/e-commerce' element={<Protected ><ECommerce /> </Protected>}></Route>
         <Route exact path ='/user' element={<Protected ><User /> </Protected>}></Route>
+        <Route exact path ='/bookings' element={<Protected ><AllBooking /> </Protected>}></Route>
         <Route exact path ='/booking-status' element={<Protected ><BookingStatus /> </Protected>}></Route>
         <Route exact path ='/cab-service/cab-user' element={<Protected ><CabService /> </Protected>}></Route>
         <Route exact path='/cab-service/cab-booking' element={<Protected ><CabBookingTable /> </Protected>}></Route>

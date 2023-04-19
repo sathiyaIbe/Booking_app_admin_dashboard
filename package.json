@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "env": "^0.0.2",
     "env-var": "^7.3.0",
+    "generate-react-cli": "^8.3.0",
     "mdb-react-ui-kit": "^5.1.0",
     "mdbreact": "^5.2.0",
     "papaparse": "^5.4.0",
