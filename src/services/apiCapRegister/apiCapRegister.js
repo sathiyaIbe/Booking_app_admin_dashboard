@@ -35,5 +35,9 @@ export const DeleteCabUserApi=async(id)=>{
     
     return await axios.get(`http://localhost:8080/booking/api/cabbookingdetails/bookingdatauser/${id}`)
   }
+  export const AuthenticationCabDetails=async()=>{
+    
+    return await axios.get("http://localhost:8080/search/api/cabride/authcab")
+  }
 ApiCapRegister.propTypes = {};
 ApiCapRegister.defaultProps = {};

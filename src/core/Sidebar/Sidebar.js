@@ -35,6 +35,11 @@ export  const Sidebar=({
             <Link to='/cab-service/cab-booking-cancel'> <button className={`sidebar-link list-items ${isDark && "dark-sidebar-link"}`} type='button' data-bs-dismiss="offcanvas" aria-label="Close" onClick={() => changeSidebar(true)}> <TbBrandBooking className='sidebar-icons' /> Cancel Request </button></Link>
           </li>
         </ul>
+        <ul id="components-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li key='2'>
+            <Link to='/cab-service/cab-authentication'> <button className={`sidebar-link list-items ${isDark && "dark-sidebar-link"}`} type='button' data-bs-dismiss="offcanvas" aria-label="Close" onClick={() => changeSidebar(true)}> <TbBrandBooking className='sidebar-icons' /> Cab Authentication </button></Link>
+          </li>
+        </ul>
       </li>
       <li className="nav-item">
         <button data-bs-target="#components-navs" data-bs-toggle="collapse" className={`d-flex sidebar-link ${isDark && "dark-sidebar-link"}`} type='button' data-bs-dismiss="offcanvas" aria-label="Close" onClick={() => changeSidebar(true)}><RiHotelFill className='sidebar-icons mt-1' /> Hotel Service  <i className="bi bi-chevron-down ms-auto mt-1"></i></button>
