@@ -39,5 +39,16 @@ export const DeleteCabUserApi=async(id)=>{
     
     return await axios.get("http://localhost:8080/search/api/cabride/authcab")
   }
+  export const UpdateAuthenticationCabDetails=async(data)=>{
+    
+    return await axios.put("http://localhost:8080/search/api/cabride/authcab", data)
+  }
+  export const  AuthenticationCab=async(data)=>{
+  
+    return await fetch("http://localhost:8080/search/api/cabride/authcab", {
+      method:"POST",
+      body:data,
+    }).then(res=>res.json());
+  }
 ApiCapRegister.propTypes = {};
 ApiCapRegister.defaultProps = {};
