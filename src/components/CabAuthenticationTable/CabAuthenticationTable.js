@@ -16,7 +16,7 @@ import { ApiCapUser } from '../../services/apiCapRegister/apiCapRegister';
 import { DeleteCabUserApi } from '../../services/apiCapRegister/apiCapRegister';
 import { UpdateCabUserApi } from '../../services/apiCapRegister/apiCapRegister';
 import { CabService } from '../../services/apiCapRegister/apiCapRegister';
-import { UpdateAuthenticationCabDetails } from '../../services/apiCapRegister/apiCapRegister';
+import { UpdateAuthenticationCabDetails,DeleteAuthDetails } from '../../services/apiCapRegister/apiCapRegister';
 import 'primeicons/primeicons.css';
 import Context from '../../services/Context/Context';
 
@@ -47,6 +47,7 @@ const CabAuthenticationTable = () =>
     const [cabDatas, setcabDatas]=useState(null)
     const [loads, setLoad] = useState(false)
     const [productDialog, setProductDialog] = useState(false);
+    const [imageViewer, setImageViewer] = useState(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState(false);
     const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
     const [product, setProduct] = useState(emptyProduct);
@@ -60,14 +61,15 @@ const CabAuthenticationTable = () =>
     const [toLocationList, setToLocationList] = useState([])
     const [url, seturl]=useState("")
     const [image,setImage]=useState('')
+    const [imgUrl,setimgUrl]=useState("")
    
     useEffect(() => {
       AuthenticationCabDetails().then(res => {
-            console.log(res.data)
+           
             const data = res.data
             const cabData=res.data
             const userData=data.reverse()
-            console.log(cabData)
+          
              setProducts(userData)
              setcabDatas(cabData)
         })
@@ -89,6 +91,9 @@ const CabAuthenticationTable = () =>
     }
     const hideDeleteProductDialog = () => {
         setDeleteProductDialog(false);
+    }
+    const hideImageViewer=()=>{
+        setImageViewer(false);
     }
     const hideDeleteProductsDialog = () => {
         setDeleteProductsDialog(false);
@@ -173,7 +178,9 @@ const CabAuthenticationTable = () =>
         setDeleteProductDialog(true);
     }
     const deleteProduct = () => {
-        DeleteCabUserApi(product.driverId).then(res => {
+        console.log(product.driverId)
+        DeleteAuthDetails(product.driverId).then(res => {
+
             let _products = products.filter(val => val._id !== product._id);
             setProducts(_products);
             setDeleteProductDialog(false);
@@ -287,9 +294,14 @@ const CabAuthenticationTable = () =>
             </span>
         </div>
     );
+    const imageSet=(e)=>{
+        setimgUrl(e)
+        setImageViewer(true)
+
+    }
     const imageBodyTemplate = (product) => {
         console.log(product.image)
-       return <img src="../files/location.png" alt={product.image} style={{maxWidth:"40px"}} className="w-2rem shadow-2 border-round" />;
+       return <button type="button" className='btn' onClick={()=>imageSet(product.image)}> <img src={product.image} alt={product.image} style={{maxWidth:"40px"}} className="w-2rem shadow-2 border-round" /></button>;
     // return <p>Click on the <a href = {product.image}>"Request Access"</a> button and fill in the form.</p>
   };
     const productDialogFooter = (
@@ -382,6 +394,12 @@ const CabAuthenticationTable = () =>
                             <div className="confirmation-content">
                                 <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                                 {product && <span>Are you sure you want to delete the selected products?</span>}
+                            </div>
+                        </Dialog>
+                         <Dialog dark-bg visible={imageViewer} style={{ width: '450px' }} header="Image View" modal  onHide={hideImageViewer}>
+                            <div className="confirmation-content text-center">
+                                
+                                <img src={imgUrl} alt={imgUrl} style={{maxWidth:"150px"}} className="w-4rem shadow-2 border-round" />
                             </div>
                         </Dialog>
                     </div>

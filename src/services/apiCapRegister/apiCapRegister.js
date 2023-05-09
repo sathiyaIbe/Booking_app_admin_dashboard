@@ -50,5 +50,9 @@ export const DeleteCabUserApi=async(id)=>{
       body:data,
     }).then(res=>res.json());
   }
+  export const DeleteAuthDetails=async(data)=>{
+    
+    return await axios.delete(`http://localhost:8080/search/api/cabride/authcab/${data}`)
+  }
 ApiCapRegister.propTypes = {};
 ApiCapRegister.defaultProps = {};
