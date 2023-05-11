@@ -30,6 +30,7 @@ const CabAuthenticationTable = () =>
         status: null,
         mobileNo:'',
         gender:null,
+    
     };
     let emptyData= {
         carModel:'',
@@ -134,6 +135,7 @@ const CabAuthenticationTable = () =>
             toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000, });
         }
         else {
+            console.log(product)
           const personalDetails = {
                 
             status: product.status,
@@ -142,6 +144,7 @@ const CabAuthenticationTable = () =>
             adharcardName:product.adharcardName,
             adharcardNumber:product.adharcardNumber,
             image:product.image,
+            travelType:product.travelType
             
         }
             
@@ -367,7 +370,7 @@ const CabAuthenticationTable = () =>
                             <div className="field">
                                 <label htmlFor="mobileNo">Adharcard Image</label>
                                 <input type="file" accept='image/*' onChange={updateImage}/>
-                               {product.image&& <img alt='as' src={product.image} />}
+                               {product.image&& <img alt='as' style={{maxWidth:"350px"}} src={product.image} />}
                             </div>
 
 
@@ -399,7 +402,7 @@ const CabAuthenticationTable = () =>
                          <Dialog dark-bg visible={imageViewer} style={{ width: '450px' }} header="Image View" modal  onHide={hideImageViewer}>
                             <div className="confirmation-content text-center">
                                 
-                                <img src={imgUrl} alt={imgUrl} style={{maxWidth:"150px"}} className="w-4rem shadow-2 border-round" />
+                                <img src={imgUrl} alt={imgUrl} style={{maxWidth:"350px"}} className="w-4rem shadow-2 border-round" />
                             </div>
                         </Dialog>
                     </div>
