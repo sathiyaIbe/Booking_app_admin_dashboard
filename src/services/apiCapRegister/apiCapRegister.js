@@ -54,5 +54,17 @@ export const DeleteCabUserApi=async(id)=>{
     
     return await axios.delete(`http://localhost:8080/search/api/cabride/authcab/${data}`)
   }
+
+export const CarRentalDetails=async()=>{
+  return await axios.get("http://localhost:8080/search/api/carrental")
+}
+
+export const CarRentalUpdate=async(data)=>{
+  return await axios.put("http://localhost:8080/search/api/carrental/update",data)
+}
+export const CarBookingData=async()=>{
+  return await axios.get(`http://localhost:8080/booking/api/carbooking`)
+}
+
 ApiCapRegister.propTypes = {};
 ApiCapRegister.defaultProps = {};
