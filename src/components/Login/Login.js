@@ -48,10 +48,10 @@ const checkToken=token===null
                 </div>
               </div>
               <div className="mb-3">
-                <label className="form-label">Password</label>
-                <div className="input-group">
-                  <input type="password" className="form-control" id="password" name='password' value={password} onChange={(event) => setPassword(event.target.value)} />
-                </div>
+                  <label className="form-label">Password</label>
+                  <div className="input-group">
+                    <input type="password" className="form-control" id="password" name='password' value={password} onChange={(event) => setPassword(event.target.value)} />
+                  </div>
               </div>
               <div>
                 <button className='btn w-100 btn-primary' onClick={onSubmit} type='submit'>Login</button>

@@ -8,6 +8,8 @@ import { RiHotelFill } from 'react-icons/ri'
 import { AiOutlineCar, AiOutlineUsergroupAdd } from 'react-icons/ai';
 import { BsGrid } from 'react-icons/bs'
 import { TbBrandBooking } from 'react-icons/tb'
+import { MdGroupAdd, MdCarRental, MdCancelScheduleSend , MdSecurity } from 'react-icons/md'
+
 export  const Sidebar=({
   sidebar,
   isDark,
@@ -32,12 +34,17 @@ export  const Sidebar=({
         </ul>
         <ul id="components-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li key='2'>
-            <Link to='/cab-service/cab-booking-cancel'> <button className={`sidebar-link list-items ${isDark && "dark-sidebar-link"}`} type='button' data-bs-dismiss="offcanvas" aria-label="Close" onClick={() => changeSidebar(true)}> <TbBrandBooking className='sidebar-icons' /> Cancel Request </button></Link>
+            <Link to='/cab-service/cab-booking-cancel'> <button className={`sidebar-link list-items ${isDark && "dark-sidebar-link"}`} type='button' data-bs-dismiss="offcanvas" aria-label="Close" onClick={() => changeSidebar(true)}> <MdCancelScheduleSend className='sidebar-icons' /> Cancel Request </button></Link>
           </li>
         </ul>
         <ul id="components-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li key='2'>
-            <Link to='/cab-service/cab-authentication'> <button className={`sidebar-link list-items ${isDark && "dark-sidebar-link"}`} type='button' data-bs-dismiss="offcanvas" aria-label="Close" onClick={() => changeSidebar(true)}> <TbBrandBooking className='sidebar-icons' /> Cab Authentication </button></Link>
+            <Link to='/car-service/car-user'> <button className={`sidebar-link list-items ${isDark && "dark-sidebar-link"}`} type='button' data-bs-dismiss="offcanvas" aria-label="Close" onClick={() => changeSidebar(true)}> <MdCarRental className='sidebar-icons' /> Car Rental User </button></Link>
+          </li>
+        </ul>
+        <ul id="components-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li key='2'>
+            <Link to='/cab-service/cab-authentication'> <button className={`sidebar-link list-items ${isDark && "dark-sidebar-link"}`} type='button' data-bs-dismiss="offcanvas" aria-label="Close" onClick={() => changeSidebar(true)}> <MdSecurity className='sidebar-icons' /> Cab Authentication </button></Link>
           </li>
         </ul>
       </li>
